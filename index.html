@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>管理端</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <!-- App css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- App js -->
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/jquery-2.1.1.js"></script>
+    <script src="assets/js/echarts.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <style>
+        .frameContent{
+            position:absolute;
+            top:70px;
+            right:0px;
+            bottom:61px;
+            left:250px;
+            padding:10px;
+        }
+        .enlarged .frameContent{
+            left:70px;
+        }
+        @media ( max-width :767.98px) {
+            .frameContent {
+                left: 0 !important;
+            }
+        }
+        iframe {
+            width:100%;
+            height:100%;
+            border:0;
+        }
+        [v-cloak] {
+            display: none !important;
+        }
+    </style>
+
+</head>
+<body>
+<!-- Begin page -->
+<div class="wrapper">
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu">
+
+        <div class="slimscroll-menu">
+
+            <button class="button-menu-mobile open-left" id="button-menu">
+                <i class="mdi mdi-menu"></i>
+            </button>
+
+            <!-- LOGO -->
+            <a href="index.html" class="logo text-center">
+                    <span class="logo-lg">
+                        <img src="assets/images/logo.png" alt="" height="16">
+                    </span>
+                <span class="logo-sm">
+                        <img src="assets/images/logo_sm.png" alt="" height="16">
+                    </span>
+            </a>
+
+            <!--- Sidemenu -->
+            <ul class="metismenu side-nav" id="menu">
+
+                <li class="side-nav-title side-nav-item">功能入口</li>
+
+                <li class="side-nav-item">
+                    <a href="javascript: void(0);" class="side-nav-link">
+                        <i class="fa fa-smile-o"></i>
+                        <span class="nav-item-name">首页</span>
+                    </a>
+                </li>
+
+                <li class="side-nav-item" >
+                    <a href="javascript: void(0);" class="side-nav-link" >
+                        <i class="fa fa-television"></i>
+                        <span class="nav-item-name">整体运营</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="side-nav-second-level" aria-expanded="false">
+                        <li class="side-nav-item">
+                            <a href="javascript: void(0);" aria-expanded="false">
+                                <span class="nav-item-name">运营报告</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="side-nav-third-level" aria-expanded="false">
+                                <li>
+                                    <a href="pages/overall/report/headquarters_day.html">
+                                        <span class="nav-item-name">总部日报</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Topbar Start -->
+            <div class="navbar-custom">
+                <ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+                    <li class="dropdown notification-list" id="navUser">
+                        <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                           aria-expanded="false">
+                                <span class="account-user-avatar">
+                                    <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                                </span>
+                            <span>
+                                    <span class="account-user-name">test</span>
+                                    <span class="account-position">总经理</span>
+                                </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- end Topbar -->
+
+            <!-- Start Content-->
+            <div class="frameContent">
+
+            </div>
+            <!-- container -->
+
+        </div>
+        <!-- content -->
+
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        2018 © 沈阳商软福达
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-right footer-links d-none d-md-block">
+                            <a href="javascript: void(0);">关于我们</a>
+                            <a href="javascript: void(0);">产品下载</a>
+                            <a href="javascript: void(0);">技术支持</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
+
+    </div>
+</div>
+</body>
