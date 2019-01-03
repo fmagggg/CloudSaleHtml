@@ -1,184 +1,262 @@
-<!-- end page title -->
-<div class="row" id="page">
-	<div class="col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="header-title mb-3">各门店销售完成状态</h4>
-                <div style="height: 800px;" class="chartjs-chart" id="chart1">
-                    
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>管理端</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <!-- App css -->
+    <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/jqgrid.css" rel="stylesheet" />
+
+    <style>
+        .frameContent{
+            position:absolute;
+            top:70px;
+            right:0px;
+            bottom:61px;
+            left:250px;
+            padding:10px;
+            overflow:auto;
+        }
+        .enlarged .frameContent{
+            left:70px;
+        }
+        @media ( max-width :767.98px) {
+            .frameContent {
+                left: 0 !important;
+            }
+        }
+        iframe {
+            width:100%;
+            height:100%;
+            border:0;
+        }
+        [v-cloak] {
+            display: none !important;
+        }
+    </style>
+
+</head>
+<body>
+<!-- Begin page -->
+<div class="wrapper">
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu">
+
+        <div class="slimscroll-menu">
+
+            <button class="button-menu-mobile open-left" id="button-menu">
+                <i class="mdi mdi-menu"></i>
+            </button>
+
+            <!-- LOGO -->
+            <a href="index.html" class="logo text-center">
+                    <span class="logo-lg">
+                        <img src="../../assets/images/logo.png" alt="" height="16">
+                    </span>
+                <span class="logo-sm">
+                        <img src="../../assets/images/logo_sm.png" alt="" height="16">
+                    </span>
+            </a>
+
+            <!--- Sidemenu -->
+            <ul class="metismenu side-nav" id="menu">
+
+                <li class="side-nav-title side-nav-item">功能入口</li>
+
+                <li class="side-nav-item">
+                    <a href="javascript: void(0);" class="side-nav-link">
+                        <i class="fa fa-smile-o"></i>
+                        <span class="nav-item-name">首页</span>
+                    </a>
+                </li>
+
+                <li class="side-nav-item" >
+                    <a href="javascript: void(0);" class="side-nav-link" >
+                        <i class="fa fa-television"></i>
+                        <span class="nav-item-name">整体运营</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="side-nav-second-level" aria-expanded="false">
+                        <li class="side-nav-item">
+                            <a href="javascript: void(0);" aria-expanded="false">
+                                <span class="nav-item-name">运营报告</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="side-nav-third-level" aria-expanded="false">
+                                <li>
+                                    <a>
+                                        <span class="nav-item-name">总部日报</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Topbar Start -->
+            <div class="navbar-custom">
+                <ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+                    <li class="dropdown notification-list" id="navUser">
+                        <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                           aria-expanded="false">
+                                <span class="account-user-avatar">
+                                    <img src="../../assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                                </span>
+                            <span>
+                                    <span class="account-user-name">test</span>
+                                    <span class="account-position">总经理</span>
+                                </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- end Topbar -->
+
+            <!-- Start Content-->
+            <div class="frameContent">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div style="height:150px;" id="chart2"></div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                        <div class="card">
+                            <div class="card-body">
+                                <div style="height:270px;" id="chart3"></div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div style="height:500px;" id="chart1"></div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
                 </div>
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
-
-    </div> <!-- end col -->
-    <div class="col-xl-6">
-
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="card widget-flat">
-                    <div class="card-body">
-                        <div class="float-right">
-                            <i class="mdi mdi-account-multiple widget-icon"></i>
-                        </div>
-                        <h5 class="text-muted font-weight-normal mt-0">昨日销售完成</h5>
-                        <h3 class="mt-3 mb-3" v-cloak>{{data1[0].value}}</h3>
-                        <p class="mb-0 text-muted">
-                            <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
-                            <span class="text-nowrap">与前天相比</span>  
-                        </p>
-                    </div> <!-- end card-body-->
-                </div> <!-- end card-->
-            </div> <!-- end col-->
-
-            <div class="col-lg-6">
-                <div class="card widget-flat">
-                    <div class="card-body">
-                        <div class="float-right">
-                            <i class="mdi mdi-cart-plus widget-icon"></i>
-                        </div>
-                        <h5 class="text-muted font-weight-normal mt-0">昨日成交单数</h5>
-                        <h3 class="mt-3 mb-3" v-cloak>{{data1[1].value}}</h3>
-                        <p class="mb-0 text-muted">
-                            <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
-                            <span class="text-nowrap">与前天相比</span>
-                        </p>
-                    </div> <!-- end card-body-->
-                </div> <!-- end card-->
-            </div> <!-- end col-->
-        </div> <!-- end row -->
-
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="card widget-flat">
-                    <div class="card-body">
-                        <div class="float-right">
-                            <i class="mdi mdi-currency-usd widget-icon"></i>
-                        </div>
-                        <h5 class="text-muted font-weight-normal mt-0">昨日新增客户</h5>
-                        <h3 class="mt-3 mb-3" v-cloak>{{data1[2].value}}</h3>
-                        <p class="mb-0 text-muted">
-                            <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
-                            <span class="text-nowrap">与前天相比</span>
-                        </p>
-                    </div> <!-- end card-body-->
-                </div> <!-- end card-->
-            </div> <!-- end col-->
-
-            <div class="col-lg-6">
-                <div class="card widget-flat">
-                    <div class="card-body">
-                        <div class="float-right">
-                            <i class="mdi mdi-pulse widget-icon"></i>
-                        </div>
-                        <h5 class="text-muted font-weight-normal mt-0">昨日新增会员</h5>
-                        <h3 class="mt-3 mb-3" v-cloak>{{data1[3].value}}</h3>
-                        <p class="mb-0 text-muted">
-                            <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i> 4.87%</span>
-                            <span class="text-nowrap">与前天相比</span>
-                        </p>
-                    </div> <!-- end card-body-->
-                </div> <!-- end card-->
-            </div> <!-- end col-->
-        </div> <!-- end row -->
-
-    </div> <!-- end col -->
-    
-    <div class="col-xl-7">
-        <div class="card">
-            <div class="card-body">
-                <div style="height: 200px;" class="chartjs-chart" id="chart2">
-                    
+                <!-- end row -->
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div style="height:200px;" id="chart4"></div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                    <div class="col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div style="height:200px;" id="chart5"></div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                    <div class="col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div style="height:200px;" id="chart6"></div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                    <div class="col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div style="height:200px;" id="chart7"></div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
                 </div>
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
-
-    </div> <!-- end col -->
-    
-    <div class="col-xl-5">
-        <div class="card">
-            <div class="card-body">
-            		<h4 class="header-title mb-3">【全公司整体】各门店今日实时销售分布</h4>
-                <div style="height: 162px;" class="chartjs-chart" id="chart3">
-                    
+                <!-- end row -->
+                <!-- end row -->
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div style="height:300px;" id="chart8"></div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mb-3">营业员昨日个人销售排行</h4>
+                                <table id="gridPanel_1" class="table table-striped table table-hover"></table>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
                 </div>
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
+                <!-- end row -->
+            </div>
+            <!-- container -->
 
-    </div> <!-- end col -->
-    
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-            		<h4 class="header-title mb-3">今日门店实时运营指标监控</h4>
-            		<h3 class="mb-4 mt-2">今日最低任务：¥1731212.12</h3>
-            		<div class="pull-in chart-content-bg">
-                     <div class="row text-center">
-                         <div class="col-md-3">
-                             <p class="text-muted mb-0 mt-3">实时销售金额</p>
-                             <h2 class="font-weight-normal mb-3">
-                                 <small class="mdi mdi-checkbox-blank-circle text-primary align-middle mr-1"></small>
-                                 <span>¥90,374</span>
-                             </h2>
-                         </div>
-                         <div class="col-md-3">
-                             <p class="text-muted mb-0 mt-3">实时毛利</p>
-                             <h2 class="font-weight-normal mb-3">
-                                 <small class="mdi mdi-checkbox-blank-circle text-info align-middle mr-1"></small>
-                                 <span>¥20,057</span>
-                             </h2>
-                         </div>
-                         <div class="col-md-3">
-                             <p class="text-muted mb-0 mt-3">今日完成率</p>
-                             <h2 class="font-weight-normal mb-3">
-                                 <small class="mdi mdi-checkbox-blank-circle text-primary align-middle mr-1"></small>
-                                 <span>22.19%</span>
-                             </h2>
-                         </div>
-                         <div class="col-md-3">
-                             <p class="text-muted mb-0 mt-3">剩余金额</p>
-                             <h2 class="font-weight-normal mb-3">
-                                 <small class="mdi mdi-checkbox-blank-circle text-warning align-middle mr-1"></small>
-                                 <span>¥1,640,838</span>
-                             </h2>
-                         </div>
-                         <div class="col-md-3">
-                             <p class="text-muted mb-0 mt-3">剩余时间</p>
-                             <h2 class="font-weight-normal mb-3">
-                                 <small class="mdi mdi-checkbox-blank-circle text-danger align-middle mr-1"></small>
-                                 <span>0.4小时</span>
-                             </h2>
-                         </div>
-                         <div class="col-md-3">
-                             <p class="text-muted mb-0 mt-3">客流量</p>
-                             <h2 class="font-weight-normal mb-3">
-                                 <small class="mdi mdi-checkbox-blank-circle text-success align-middle mr-1"></small>
-                                 <span>752人</span>
-                             </h2>
-                         </div>
-                         <div class="col-md-3">
-                             <p class="text-muted mb-0 mt-3">客单价</p>
-                             <h2 class="font-weight-normal mb-3">
-                                 <small class="mdi mdi-checkbox-blank-circle text-info align-middle mr-1"></small>
-                                 <span>¥120.18／单</span>
-                             </h2>
-                         </div>
-                         <div class="col-md-3">
-                             <p class="text-muted mb-0 mt-3">购物连带率</p>
-                             <h2 class="font-weight-normal mb-3">
-                                 <small class="mdi mdi-checkbox-blank-circle text-primary align-middle mr-1"></small>
-                                 <span>6.86件／单</span>
-                             </h2>
-                         </div>
-                     </div>
-                 </div>
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
+        </div>
+        <!-- content -->
 
-    </div> <!-- end col -->
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        2018 © 沈阳商软福达
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-right footer-links d-none d-md-block">
+                            <a href="javascript: void(0);">关于我们</a>
+                            <a href="javascript: void(0);">产品下载</a>
+                            <a href="javascript: void(0);">技术支持</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
 
+    </div>
 </div>
-<!-- end row -->
-<script>
-var baseurl = '${baseurl}';
-</script>
-<script src="${baseurl}/assets/js/pages/homepage.js"></script>
+
+<!--  Add new task modal -->
+<div class="modal fade" id="chartModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{modalTitle}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="chartModalCon" style="min-height:500px;"></div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- App js -->
+<script src="../../assets/js/app.min.js"></script>
+<script src="../../assets/js/vue.js"></script>
+<script src="../../assets/js/jquery-2.1.1.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/jqgrid.js"></script>
+<script src="../../assets/js/grid.locale-en.js"></script>
+<script src="../../assets/js/echarts.js"></script>
+<script src="../../assets/js/theme.js"></script>
+<script src="../../assets/js/util.js"></script>
+<script src="../../assets/js/bootstrap.modal.js"></script>
+<script src="../../assets/js/MyEcharts.js"></script>
+
+<script src="../../assets/js/pages/overall/report/headquarters_day.js"></script>
+</body>
